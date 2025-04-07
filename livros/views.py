@@ -13,10 +13,10 @@ def read(request):
 @api_view(['GET','POST'])
 def read_api(request):
     if request.method == "GET":
-        info = Livros.objects.all()
-
-        serializer = LivroSerializer(info, many=True)
-        return Response(serializer.data)
+        try:
+            livros = Livros.objects.get 
+        except Livros.DoesNotExist:
+            return Response({'erro': 'Evento inexistente'}, status= status.HTTP_404_NOT_FOUND)
     
     if request.method == "POST":
         serializer = LivroSerializer(data=request.data, many=isinstance(request.data, list))
