@@ -8,7 +8,7 @@ from .serializers import LivroSerializer
 
 def read(request):
     livros = Livros.objects.all()
-    return render(request, 'livro_read.html', {'livros':livros})
+    return render(request, 'livros.html', {'livros':livros})
 
 @api_view(['GET','POST'])
 def read_api(request):
