@@ -1,7 +1,7 @@
 from django import forms
-from .models import Livros
+from .models import Livro
 
 class ItemForm(forms.ModelForm):
     class Meta:
-        model = Livros
+        model = Livro
         fields = '__all__'
