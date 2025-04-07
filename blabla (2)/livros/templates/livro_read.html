@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item read</title>
+</head>
+<body>
+    <h1>Listagem de Livros</h1>
+    <ul>
+        {% for i in livros %}
+            <li>
+                {{i.titulo}} - {{i.autor}}
+            </li>
+
+        {% endfor %}
+    </ul>
+</body>
+</html>
+<!-- Para ver todos os itens -->
