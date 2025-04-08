@@ -9,40 +9,25 @@ from rest_framework.permissions import IsAuthenticated
 
 @api_view(['POST'])
 def create_user(request):
-    username = request.data.get('username')
-    password = request.data.get('password')
-    edv = request.data.get('edv')
-    data_nascimento = request.data.get('data_nascimento')
-    padrinho = request.data.get('padrinho')
-    apelido = request.data.get('apelido')
+    telefone = request.data.get('telefone')
 
-    if not username or not password or not edv or not data_nascimento:
-        return Response({'Erro':'Campos obrigatorios incompletos'}, status=status.HTTP_400_BAD_REQUEST)
+  
     
-    if UsuarioDS16.objects.filter(username=username).exists():
-        return Response ({'Erro':f'Username {username} já existe'}, status=status.HTTP_400_BAD_REQUEST)
-    
-    if UsuarioDS16.objects.filter(edv=edv).exists():
-        return Response ({'Erro':f'EDV {edv} já existe'}, status=status.HTTP_400_BAD_REQUEST)
+    if UsuarioDS16.objects.filter(telefone=telefone).exists():
+        return Response ({'Erro':f'telefone {telefone} já existe'}, status=status.HTTP_400_BAD_REQUEST)
     
     usuario = UsuarioDS16.objects.create_user(
-            username=username,
-            password=password,
-            edv=edv,
-            data_nascimento = data_nascimento,
-            padrinho = padrinho,
-            apelido = apelido,
-            email= "Nicolas.Brito@bosch.com"
+            telefone=telefone,
+        
     )
-    return Response({'Mensagem': f'Usuário {username} criado com sucesso'}, status=status.HTTP_201_CREATED)
+    return Response({'Mensagem': f'Usuário {telefone} criado com sucesso'}, status=status.HTTP_201_CREATED)
 
 
 @api_view(['POST'])
 def logar_usuario(request):
-    username = request.data.get('username')
-    password = request.data.get('password')
+    telefone = request.data.get('telefone')
 
-    usuario  =  authenticate(username = username , password = password)
+    usuario  =  authenticate(telefone = telefone)
 
     if usuario:
         refresh = RefreshToken.for_user(usuario)
